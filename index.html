@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="BGB - Boys and Girls Bandung. Ruang pertemanan generasi muda Bandung.">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>BGB • Beranda - Boys and Girls Bandung</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #e8e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(10,10,18,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201,160,61,0.2);
+            padding: 0.75rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 4vw, 2rem);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .logo-wrapper { display: flex; align-items: center; gap: 12px; min-width: 0; }
+        .logo-img {
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #c9a03d;
+            flex-shrink: 0;
+        }
+        .logo-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            background: linear-gradient(135deg, #e8c97a, #c9a03d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+        .logo-text p { font-size: clamp(0.6rem, 1.8vw, 0.7rem); color: #c9a03d; }
+
+        .nav-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .nav-links li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #d0d0e0;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.03);
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: linear-gradient(135deg, rgba(201,160,61,0.2), rgba(232,201,122,0.1));
+            color: #e8c97a;
+            border-color: rgba(201,160,61,0.5);
+        }
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #e8c97a;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .mobile-toggle:hover { background: rgba(201,160,61,0.1); }
+
+        /* ===== HERO ===== */
+        .hero-luxury {
+            position: relative;
+            min-height: clamp(70vh, 85vh, 100vh);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1520 100%);
+            overflow: hidden;
+            padding: 2rem 1rem;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(201,160,61,0.05), transparent 70%);
+            pointer-events: none;
+        }
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            background: rgba(10,10,18,0.4);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            border-radius: clamp(24px, 5vw, 80px);
+        }
+        .hero-content-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('logo.jpeg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-badge {
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            background: rgba(201,160,61,0.15);
+            border: 1px solid rgba(201,160,61,0.3);
+            border-radius: 50px;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            color: #e8c97a;
+            letter-spacing: 2px;
+            margin-bottom: clamp(1rem, 3vw, 2rem);
+            text-transform: uppercase;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: #fff;
+            word-wrap: break-word;
+        }
+        .gold-text {
+            background: linear-gradient(135deg, #e8c97a, #b8860b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .hero-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .divider-line {
+            flex: 0 1 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c9a03d, transparent);
+        }
+        .hero-divider i { color: #c9a03d; font-size: 0.8rem; }
+        .hero-desc {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            max-width: 600px;
+            margin: 0 auto clamp(1.5rem, 4vw, 2rem);
+            color: #d0d0e0;
+            line-height: 1.6;
+            padding: 0 0.5rem;
+        }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary-luxury, .btn-outline-luxury {
+            padding: clamp(0.75rem, 2vw, 0.9rem) clamp(1.5rem, 4vw, 2rem);
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: clamp(0.85rem, 2.2vw, 1rem);
+            text-align: center;
+        }
+        .btn-primary-luxury {
+            background: linear-gradient(135deg, #c9a03d, #a0782c);
+            border: none;
+            color: #0a0a0f;
+        }
+        .btn-primary-luxury:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201,160,61,0.3);
+        }
+        .btn-outline-luxury {
+            background: transparent;
+            border: 2px solid #c9a03d;
+            color: #e8c97a;
+            font-weight: 600;
+        }
+        .btn-outline-luxury:hover {
+            background: rgba(201,160,61,0.1);
+            transform: translateY(-2px);
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: clamp(0.75rem, 2vw, 2rem);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            color: #c9a03d;
+            pointer-events: none;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ===== CONTAINER & CARDS ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem);
+        }
+        .luxury-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
+            margin-bottom: clamp(2rem, 5vw, 4rem);
+        }
+        .luxury-card {
+            background: rgba(20,20,30,0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(201,160,61,0.15);
+            border-radius: 24px;
+            padding: clamp(1.5rem, 4vw, 2rem);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .luxury-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201,160,61,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card-icon {
+            width: clamp(60px, 12vw, 70px);
+            height: clamp(60px, 12vw, 70px);
+            background: linear-gradient(135deg, rgba(201,160,61,0.15), rgba(168,120,44,0.08));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .card-icon i { font-size: clamp(1.5rem, 4vw, 2rem); color: #e8c97a; }
+        .luxury-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .luxury-card p { color: #b0b0c0; line-height: 1.5; margin-bottom: 1.5rem; }
+        .card-link { color: #e8c97a; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+        .card-link i { transition: transform 0.2s; }
+        .card-link:hover i { transform: translateX(5px); }
+
+        /* ===== FOOTER ===== */
+        .luxury-footer {
+            background: #050508;
+            border-top: 1px solid rgba(201,160,61,0.15);
+            padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem) 1rem;
+            margin-top: 3rem;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2rem);
+        }
+        .footer-content h4 {
+            color: #e8c97a;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .footer-logo-wrapper { width: 60px; height: 60px; margin-bottom: 1rem; }
+        .footer-logo-img { width: 100%; border-radius: 50%; border: 1px solid #c9a03d; object-fit: cover; }
+        .footer-links li a { color: #a0a0b0; line-height: 1.8; transition: color 0.2s; }
+        .footer-links li a:hover { color: #e8c97a; }
+        .footer-contact p, .footer-social p { margin: 0.5rem 0; font-size: 0.85rem; color: #a0a0b0; }
+        .footer-contact i, .footer-social i { margin-right: 8px; color: #c9a03d; }
+        .footer-social a { color: #a0a0b0; transition: color 0.2s; }
+        .footer-social a:hover { color: #e8c97a; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201,160,61,0.1);
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                padding-top: 1rem;
+                gap: 0.4rem;
+            }
+            .nav-links.show { display: flex; }
+            .nav-links li a { width: 100%; justify-content: center; padding: 0.75rem 1rem; }
+            .mobile-toggle { display: block; }
+            .footer-content { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+            .footer-logo-wrapper { margin: 0 auto 1rem; }
+            .hero-scroll { display: none; }
+        }
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; align-items: stretch; width: 100%; }
+            .btn-primary-luxury, .btn-outline-luxury { width: 100%; }
+            .logo-text p { display: none; }
+        }
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-luxury { min-height: auto; padding: 4rem 1rem 2rem; }
+            .hero-scroll { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <img src="logo.jpeg" alt="BGB Logo" class="logo-img" onerror="this.src='https://placehold.co/400x400/c9a03d/1a1a2a?text=BGB'">
+                <div class="logo-text">
+                    <h1>BGB</h1>
+                    <p>Boys and Girls Bandung</p>
+                </div>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang</a></li>
+                <li><a href="visi-misi.html"><i class="fas fa-bullseye"></i> Visi Misi</a></li>
+                <li><a href="galeri.html"><i class="fas fa-calendar-alt"></i> Galeri</a></li>
+                <li><a href="pendaftaran.html"><i class="fas fa-file-signature"></i> Daftar</a></li>
+            </ul>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Buka menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-luxury">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrapper">
+            <div class="hero-content-bg"></div>
+            <div class="hero-content">
+                <div class="hero-badge">Lingkup Pertemanan Bandung</div>
+                <h1 class="hero-title">BOYS &amp; GIRLS <br><span class="gold-text">BANDUNG</span></h1>
+                <div class="hero-divider">
+                    <span class="divider-line"></span>
+                    <i class="fas fa-star-of-life"></i>
+                    <span class="divider-line"></span>
+                </div>
+                <p class="hero-desc">Ruang pertemanan bagi generasi muda Bandung untuk berkembang, bersosialisasi, dan berbagi cerita.</p>
+                <div class="hero-buttons">
+                    <a href="pendaftaran.html" class="btn-primary-luxury">
+                        Bergabung Menjadi Anggota BGB <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="galeri.html" class="btn-outline-luxury">Lihat Galeri Acara</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ===== CARDS ===== -->
+    <div class="container">
+        <div class="luxury-grid">
+            <div class="luxury-card">
+                <div class="card-icon"><i class="fas fa-gem"></i></div>
+                <h3>Tentang BGB</h3>
+                <p>Ruang pertemanan berbasis di Kota Bandung.</p>
+                <a href="tentang.html" class="card-link">Pelajari <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="luxury-card">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Visi &amp; Misi</h3>
+                <p>Menjadi wadah pemuda Bandung yang kreatif dan berdampak.</p>
+                <a href="visi-misi.html" class="card-link">Lihat Visi <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="luxury-card">
+                <div class="card-icon"><i class="fas fa-calendar-check"></i></div>
+                <h3>Acara Terbaru</h3>
+                <p>Workshop, bakti sosial, dan kegiatan seru bersama BGB.</p>
+                <a href="galeri.html" class="card-link">Lihat Acara <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="luxury-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="footer-logo-wrapper">
+                    <img src="logo.jpeg" alt="BGB" class="footer-logo-img" onerror="this.src='https://placehold.co/400x400/c9a03d/1a1a2a?text=BGB'">
+                </div>
+                <p>Boys and Girls Bandung</p>
+            </div>
+            <div class="footer-links">
+                <h4>Jelajahi</h4>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="tentang.html">Tentang</a></li>
+                    <li><a href="visi-misi.html">Visi Misi</a></li>
+                    <li><a href="galeri.html">Galeri</a></li>
+                    <li><a href="pendaftaran.html">Daftar</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Kontak Kami</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Bandung, Jawa Barat</p>
+                <p><i class="fas fa-phone"></i> 082118069126 (Maul)</p>
+            </div>
+            <div class="footer-social">
+                <h4>Sosial Media</h4>
+                <p><i class="fab fa-tiktok"></i> <a href="#" target="_blank" rel="noopener">@boysgirlsbandung</a></p>
+                <p><i class="fab fa-instagram"></i> <a href="#" target="_blank" rel="noopener">@boysgirlbdg</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 BGB • Boys and Girls Bandung — Ruang kolaborasi anak muda Bandung</p>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPT ===== -->
+    <script>
+        /* ===== NAVBAR MOBILE ===== */
+        const toggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            const icon = toggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('show');
+                    const icon = toggle.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-times');
+                }
+            });
+        });
+
+        /* ===== HIGHLIGHT NAV AKTIF ===== */
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        navLinks.querySelectorAll('a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
